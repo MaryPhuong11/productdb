@@ -32,6 +32,38 @@ public class ProductService {
         return productTranslationRepository.findByLanguageId(languageId);
     }
     
+    // Tìm kiếm sản phẩm theo từ khóa trong ngôn ngữ cụ thể
+    public List<ProductTranslation> searchProductsByLanguage(String languageId, String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return getProductsByLanguage(languageId);
+        }
+        return productTranslationRepository.findByLanguageIdAndProductNameOrDescriptionContainingIgnoreCase(languageId, searchTerm.trim());
+    }
+    
+    // Tìm kiếm sản phẩm trong tất cả ngôn ngữ
+    public List<ProductTranslation> searchProducts(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return productTranslationRepository.findAll();
+        }
+        return productTranslationRepository.findByProductNameOrDescriptionContainingIgnoreCase(searchTerm.trim());
+    }
+    
+    // Tìm kiếm sản phẩm theo tên trong ngôn ngữ cụ thể
+    public List<ProductTranslation> searchProductsByName(String languageId, String productName) {
+        if (productName == null || productName.trim().isEmpty()) {
+            return getProductsByLanguage(languageId);
+        }
+        return productTranslationRepository.findByLanguageIdAndProductNameContainingIgnoreCase(languageId, productName.trim());
+    }
+    
+    // Tìm kiếm sản phẩm theo mô tả trong ngôn ngữ cụ thể
+    public List<ProductTranslation> searchProductsByDescription(String languageId, String description) {
+        if (description == null || description.trim().isEmpty()) {
+            return getProductsByLanguage(languageId);
+        }
+        return productTranslationRepository.findByLanguageIdAndDescriptionContainingIgnoreCase(languageId, description.trim());
+    }
+    
     // Lấy tất cả ngôn ngữ
     public List<Language> getAllLanguages() {
         return languageRepository.findAll();
@@ -76,6 +108,36 @@ public class ProductService {
         productRepository.deleteById(id);
     }
     
+    // Thêm ngôn ngữ mới
+    public Language addLanguage(Language language) {
+        return languageRepository.save(language);
+    }
+    
+    // Xóa ngôn ngữ
+    public void deleteLanguage(String languageId) {
+        // Kiểm tra xem có sản phẩm nào đang sử dụng ngôn ngữ này không
+        List<ProductTranslation> translations = productTranslationRepository.findByLanguageId(languageId);
+        if (!translations.isEmpty()) {
+            throw new RuntimeException("Cannot delete language. There are products using this language.");
+        }
+        languageRepository.deleteById(languageId);
+    }
+    
+    // Cập nhật sản phẩm với tất cả ngôn ngữ
+    public Product addProductWithAllLanguages(BigDecimal price, List<ProductTranslation> translations) {
+        // Tạo sản phẩm
+        Product product = new Product(price);
+        product = productRepository.save(product);
+        
+        // Tạo bản dịch cho tất cả ngôn ngữ
+        for (ProductTranslation translation : translations) {
+            translation.setProduct(product);
+            productTranslationRepository.save(translation);
+        }
+        
+        return product;
+    }
+    
     // Khởi tạo dữ liệu mẫu
     public void initializeData() {
         // Kiểm tra xem đã có dữ liệu chưa
@@ -83,8 +145,21 @@ public class ProductService {
             // Thêm ngôn ngữ
             Language en = new Language("EN", "English");
             Language vn = new Language("VN", "Tiếng Việt");
+            Language fr = new Language("FR", "Français");
+            Language de = new Language("DE", "Deutsch");
+            Language es = new Language("ES", "Español");
+            Language ja = new Language("JA", "日本語");
+            Language ko = new Language("KO", "한국어");
+            Language zh = new Language("ZH", "中文");
+            
             languageRepository.save(en);
             languageRepository.save(vn);
+            languageRepository.save(fr);
+            languageRepository.save(de);
+            languageRepository.save(es);
+            languageRepository.save(ja);
+            languageRepository.save(ko);
+            languageRepository.save(zh);
             
             // Thêm sản phẩm mẫu
             addProduct(new BigDecimal("29.99"), "Laptop", "High-performance laptop", "Máy tính xách tay", "Máy tính xách tay hiệu suất cao");

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Product Database</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1>Help & User Guide</h1>
+                    <a href="/" class="btn btn-primary">Back to Products</a>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Multi-Language Product Management</h3>
+                            </div>
+                            <div class="card-body">
+                                <h5>Overview</h5>
+                                <p>This application allows you to manage products with support for multiple languages. You can add, edit, and view products in different languages simultaneously.</p>
+                                
+                                <h5 class="mt-4">Features</h5>
+                                <ul>
+                                    <li><strong>Language Management:</strong> Add, view, and delete languages</li>
+                                    <li><strong>Product Management:</strong> Add products with translations in multiple languages</li>
+                                    <li><strong>Language Switching:</strong> View products in different languages</li>
+                                    <li><strong>Flexible Translation:</strong> Add products with as many or as few language translations as needed</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">How to Use</h5>
+                                
+                                <h6>1. Managing Languages</h6>
+                                <p>Click on "Manage Languages" to:</p>
+                                <ul>
+                                    <li>View all available languages</li>
+                                    <li>Add new languages (use 2-letter ISO codes like EN, FR, DE, etc.)</li>
+                                    <li>Delete languages (only if no products are using them)</li>
+                                </ul>
+                                
+                                <h6>2. Adding Products</h6>
+                                <p>You have two options for adding products:</p>
+                                <ul>
+                                    <li><strong>Simple Form:</strong> Add products with English and Vietnamese translations only</li>
+                                    <li><strong>Multi-Language Form:</strong> Add products with translations for all available languages</li>
+                                </ul>
+                                
+                                <h6>3. Viewing Products</h6>
+                                <p>Use the language switcher at the top of the page to view products in different languages. Only products with translations in the selected language will be displayed.</p>
+                                
+                                <h6>4. Searching Products</h6>
+                                <p>Use the search bar to find products by name or description:</p>
+                                <ul>
+                                    <li>Search works within the currently selected language</li>
+                                    <li>Search is case-insensitive and supports partial matches</li>
+                                    <li>Search both product names and descriptions</li>
+                                    <li>Use the "Clear" button to reset search results</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">Language Codes</h5>
+                                <p>When adding a new language, use standard 2-letter ISO 639-1 language codes:</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li><strong>EN</strong> - English</li>
+                                            <li><strong>FR</strong> - Français</li>
+                                            <li><strong>DE</strong> - Deutsch</li>
+                                            <li><strong>ES</strong> - Español</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li><strong>JA</strong> - 日本語</li>
+                                            <li><strong>KO</strong> - 한국어</li>
+                                            <li><strong>ZH</strong> - 中文</li>
+                                            <li><strong>AR</strong> - العربية</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Quick Actions</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-2">
+                                    <a href="/" class="btn btn-primary">View Products</a>
+                                    <a href="/add-product" class="btn btn-success">Add Product (Simple)</a>
+                                    <a href="/add-product-multi" class="btn btn-info">Add Product (Multi-Language)</a>
+                                    <a href="/languages" class="btn btn-warning">Manage Languages</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5>Tips</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">💡 You can add products with partial translations and complete them later</li>
+                                    <li class="mb-2">🌐 Use the language switcher to check how your products look in different languages</li>
+                                    <li class="mb-2">🗑️ Languages can only be deleted if no products are using them</li>
+                                    <li class="mb-2">📝 Product names are required, descriptions are optional</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
